@@ -24,11 +24,11 @@ import java.text.NumberFormat;
  * SOFTWARE.
  */
 
-public class Produto {
+public abstract class Produto {
     private static final double MARGEM_PADRAO = 0.2;
     private String descricao;
-    private double precoCusto;
-    private double margemLucro;
+    protected double precoCusto;
+    protected double margemLucro;
      
     
         
@@ -79,10 +79,8 @@ public class Produto {
     /**
      * Retorna o valor de venda do produto, considerando seu preço de custo e margem de lucro
      * @return Valor de venda do produto (double, positivo)
-     */
-    public double valorDeVenda(){
-        return precoCusto * (1+margemLucro);
-    }        
+     */  
+    public abstract double valorDeVenda();   
     
 
     /**

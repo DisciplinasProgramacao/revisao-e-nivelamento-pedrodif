@@ -1,18 +1,15 @@
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class ProdutoTest {
-
+public class ProdutoNaoPerevicelTest {
     static Produto produto;
         
-    
     @BeforeAll
     static public void prepare(){
-        produto = new Produto("Produto teste", 100, 0.1);
+        produto = new ProdutoNaoPerecivel("Produto teste", 100, 0.1);
     }
     
     @Test
@@ -28,11 +25,13 @@ public class ProdutoTest {
 
     @Test
     public void naoCriaProdutoComPrecoNegativo(){
-        assertThrows(IllegalArgumentException.class, () -> new Produto("teste", -5, 0.5));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new ProdutoNaoPerecivel("teste", -5, 0.5));
+        assertEquals(e.getMessage(), "Valores inválidos para o produto");
     }
     
     @Test
     public void naoCriaProdutoComMargemNegativa(){
-        assertThrows(IllegalArgumentException.class, () -> new Produto("teste", 5, -1));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new ProdutoNaoPerecivel("teste", 5, -1));
+        assertEquals(e.getMessage(), "Valores inválidos para o produto");
     }
 }
